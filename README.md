@@ -7,6 +7,7 @@ Dynamic Note Taker
 **Project Description/Summary:**
 
 An application that can be used to write and save notes - this uses an Express.js back end and a will save and retrieve note data from a JSON file.
+
 ---
 
 **Live Site:**
