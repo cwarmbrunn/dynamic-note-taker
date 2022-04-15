@@ -16,25 +16,18 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // MIDDLEWARE
-// This provides a file path to a location in our application (in this case, the "public" folder).
-// Then it instructs the server to make these files static resources.
-// This means that all of our front-end code can now be accessed without having to create a specific endpoint for it.
-app.use(express.static("public"));
+// These need to load before any of our HTML or other app information
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// GET REQUEST #1 - INDEX.HTML
-// The goal is to get our index.html served from our Express.js server
+// Needs to load after the express.urlencoded and express.json
+// This provides a file path to a location in our application (in this case, the "public" folder).
+// Then it instructs the server to make these files static resources.
+// This means that all of our front-end code can now be accessed without having to create a specific endpoint for it.
 
-// We start by using app.get - this is a GET request - then we use "/" to indicate the homepage (root route of the server)
+app.use(express.static("public"));
 
-// Then the req (request) and res (response) and an arrow function - we want this to respond by sending a file (index.html)
-app.get("/", (req, res) => {
-  // Tell the response where to find the file - directory name - index.html
-  res.sendFile(path.join(__dirname, "./public/index.html"));
-});
-
-// GET REQUEST #2 - NOTES.HTML
+// HTML GET REQUEST #1 - NOTES.HTML
 // The goal is to get our notes.html served from our Express.js server
 
 // We start by using app.get again - this is a GET request
@@ -45,7 +38,14 @@ app.get("/public/notes.html", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
-// GET REQUEST #3 - READ THE DATA/NOTES.JSON AND RETURN AS JSON
+// HTML GET REQUEST #2 - Wildcard Route
+// This is for any route that the user types in that doesn't exist - e.g. "/magic" or "/api/cats"
+// Must go at bottom - overrides pathing!
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname), "./public/index.html");
+});
+
+// GET REQUEST #2 - READ NOTE DATA
 app.get("/api/notes", (req, res) => {
   // Set results equal to the ./data/notes.json
   let results = notes;
@@ -63,11 +63,4 @@ app.post("/api/notes", (req, res) => {});
 app.listen(PORT, () => {
   // App listens for PORT then console.log the following
   console.log(`API server now on port ${PORT} 🚀`);
-});
-
-// GET REQUEST #4 - Wildcard Route
-// This is for any route that the user types in that doesn't exist - e.g. "/magic" or "/api/cats"
-// Must go at bottom - overrides pathing!
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname), "./public/index.html");
 });
