@@ -31,7 +31,7 @@ app.use(express.json());
 // Then the req (request) and res (response) and an arrow function - we want this to respond by sending a file (index.html)
 app.get("/", (req, res) => {
   // Tell the response where to find the file - directory name - index.html
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, "/public"));
 });
 
 // GET REQUEST #2 - NOTES.HTML
@@ -51,11 +51,9 @@ app.get("/api/notes", (req, res) => {
   let results = notes;
   // Set response equal to JSON(results)
   res.json(results);
-
-  console.log(results);
 });
 
-// POST REQUEST #4 - RECEIVE NOTE DATA
+// POST REQUEST #1 - RECEIVE NOTE DATA
 // Then return the new note to the client
 // Need to find a way to give each note a unique ID when it's saved
 app.post("/api/notes", (req, res) => {});
