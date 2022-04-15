@@ -33,14 +33,14 @@ app.use(express.static("public"));
 // We start by using app.get again - this is a GET request
 // But this time, we want to use "/notes" to indicate the notes page
 
-app.get("/public/notes.html", (req, res) => {
+app.get("/public/notes", (req, res) => {
   // Tell the response where to find the file - directory name - notes.html
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
 // HTML GET REQUEST #2 - Wildcard Route
 // This is for any route that the user types in that doesn't exist - e.g. "/magic" or "/api/cats"
-// Must go at bottom - overrides pathing!
+// Must go at bottom - overrides all other pathing!
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname), "./public/index.html");
 });
