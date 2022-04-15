@@ -33,7 +33,7 @@ app.use(express.static("public"));
 // We start by using app.get again - this is a GET request
 // But this time, we want to use "/notes" to indicate the notes page
 
-app.get("/public/notes", (req, res) => {
+app.get("/notes", (req, res) => {
   // Tell the response where to find the file - directory name - notes.html
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
