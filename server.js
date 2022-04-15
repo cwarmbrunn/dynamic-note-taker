@@ -7,7 +7,7 @@ const path = require("path");
 
 // !! NEED TO CONFIRM !!
 // Creating a route that the front-end can request data from - requiring the JSON file with note data
-const { notes } = require("./data/notes.json");
+const { notes } = require("./db/db.json");
 
 // Tell our app to use an environment variable
 const PORT = process.env.PORT || 3001;
@@ -45,24 +45,31 @@ app.get("/public/notes.html", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
-// TEST //
-
-// GET REQUEST #3  - Existing Notes TEST
+// GET REQUEST #3 - READ THE DATA/NOTES.JSON AND RETURN AS JSON
 app.get("/api/notes", (req, res) => {
-  res.send("Hello World!");
+  // Set results equal to the ./data/notes.json
+  let results = notes;
+  // Set response equal to JSON(results)
+  res.json(results);
+
+  console.log(results);
 });
 
-// END TEST //
-
-// GET REQUEST #4 - Wildcard Route
-// This is for any route that the user types in that doesn't exist - e.g. "/magic" or "/api/cats"
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname), "./public/index.html");
-});
+// POST REQUEST #4 - RECEIVE NOTE DATA
+// Then return the new note to the client
+// Need to find a way to give each note a unique ID when it's saved
+app.post("/api/notes", (req, res) => {});
 
 // SERVER SET UP (2/2) - THIS MUST GO BELOW EXISTING ROUTES
 // FINAL STEP  - Tell app to listen for requests
 app.listen(PORT, () => {
   // App listens for PORT then console.log the following
   console.log(`API server now on port ${PORT} 🚀`);
+});
+
+// GET REQUEST #4 - Wildcard Route
+// This is for any route that the user types in that doesn't exist - e.g. "/magic" or "/api/cats"
+// Must go at bottom - overrides pathing!
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname), "./public/index.html");
 });
