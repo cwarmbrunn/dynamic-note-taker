@@ -31,7 +31,7 @@ app.use(express.json());
 // Then the req (request) and res (response) and an arrow function - we want this to respond by sending a file (index.html)
 app.get("/", (req, res) => {
   // Tell the response where to find the file - directory name - index.html
-  res.sendFile(path.join(__dirname, "/public/index.html"));
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 // GET REQUEST #2 - NOTES.HTML
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 // We start by using app.get again - this is a GET request
 // But this time, we want to use "/notes" to indicate the notes page
 
-app.get("/notes", (req, res) => {
+app.get("/public/notes.html", (req, res) => {
   // Tell the response where to find the file - directory name - notes.html
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
