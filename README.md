@@ -1,6 +1,6 @@
 **Project Title:**
 
-Dynamic Note Taker 
+Dynamic Note Taker
 
 ---
 
@@ -19,14 +19,16 @@ Check out the Heroku site here! TBD
 **Technology Used:**
 
 - JavaScript
-- HTMl
+- HTML
+- CSS
+- Bootstrap
 - Express.js
 
 ---
 
 **Installation:**
 
-No installation needed! 
+No installation needed!
 
 ---
 
