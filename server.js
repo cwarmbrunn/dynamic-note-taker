@@ -7,7 +7,7 @@ const path = require("path");
 
 // !! NEED TO CONFIRM !!
 // Creating a route that the front-end can request data from - requiring the JSON file with note data
-const { notes } = require("./data/db.json");
+const { notes } = require("./data/notes.json");
 
 // Tell our app to use an environment variable
 const PORT = process.env.PORT || 3001;

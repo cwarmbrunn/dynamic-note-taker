@@ -32,5 +32,5 @@ No installation needed!
 
 ---
 
-**Screenshot and Video Link:**
+**Screenshot:**
 ![]()
