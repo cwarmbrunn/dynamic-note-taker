@@ -1,3 +1,9 @@
+// API ROUTES
+const apiRoutes = require("./routes/apiRoutes");
+
+// HTML ROUTES
+const htmlRoutes = require("./routes/htmlRoutes");
+
 // Require file system
 const fs = require("fs");
 // Require Express
@@ -5,9 +11,6 @@ const express = require("express");
 // Require path - this allows us to access to path
 const path = require("path");
 
-// !! NEED TO CONFIRM !!
-// Creating a route that the front-end can request data from - requiring the JSON file with note data
-const { notes } = require("./db/db.json");
 
 // Tell our app to use an environment variable
 const PORT = process.env.PORT || 3001;
@@ -27,36 +30,10 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-// HTML GET REQUEST #1 - NOTES.HTML
-// The goal is to get our notes.html served from our Express.js server
+// Set up app use for HTML and API Routes
+app.use("/", htmlRoutes);
 
-// We start by using app.get again - this is a GET request
-// But this time, we want to use "/notes" to indicate the notes page
-
-app.get("/notes", (req, res) => {
-  // Tell the response where to find the file - directory name - notes.html
-  res.sendFile(path.join(__dirname, "./public/notes.html"));
-});
-
-// HTML GET REQUEST #2 - Wildcard Route
-// This is for any route that the user types in that doesn't exist - e.g. "/magic" or "/api/cats"
-// Must go at bottom - overrides all other pathing!
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname), "./public/index.html");
-});
-
-// GET REQUEST #2 - READ NOTE DATA
-app.get("/api/notes", (req, res) => {
-  // Set results equal to the ./data/notes.json
-  let results = notes;
-  // Set response equal to JSON(results)
-  res.json(results);
-});
-
-// POST REQUEST #1 - RECEIVE NOTE DATA
-// Then return the new note to the client
-// Need to find a way to give each note a unique ID when it's saved
-app.post("/api/notes", (req, res) => {});
+app.use("/api", apiRoutes);
 
 // SERVER SET UP (2/2) - THIS MUST GO BELOW EXISTING ROUTES
 // FINAL STEP  - Tell app to listen for requests
