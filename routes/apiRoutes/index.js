@@ -21,7 +21,7 @@ router.get("/notes", (req, res) => {
   // Set results equal to notes
   let results = notes;
   // Set response equal to JSON(results)
-  res.json(result);
+  res.json(results);
   console.log(notes);
   console.log("Hello World!");
 });

@@ -1,8 +1,8 @@
 // API ROUTES
-const apiRoutes = require("./routes/apiRoutes/index");
+const apiRoutes = require("./routes/apiRoutes");
 
 // HTML ROUTES
-const htmlRoutes = require("./routes/htmlRoutes/index");
+const htmlRoutes = require("./routes/htmlRoutes");
 
 // Require file system
 const fs = require("fs");
@@ -10,7 +10,6 @@ const fs = require("fs");
 const express = require("express");
 // Require path - this allows us to access to path
 const path = require("path");
-
 
 // Tell our app to use an environment variable
 const PORT = process.env.PORT || 3001;
