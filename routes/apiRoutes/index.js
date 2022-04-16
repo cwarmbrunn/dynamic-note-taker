@@ -19,9 +19,10 @@ const { notes } = require("../../db/db.json");
 // Get the existing note data
 router.get("/notes", (req, res) => {
   // Set results equal to notes
-  // let results = notes;
+  let results = notes;
   // Set response equal to JSON(results)
-  //   console.log(notes);
+  res.json(result);
+  console.log(notes);
   console.log("Hello World!");
 });
 // Export Router

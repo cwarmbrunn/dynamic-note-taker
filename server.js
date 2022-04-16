@@ -1,8 +1,8 @@
 // API ROUTES
-const apiRoutes = require("./routes/apiRoutes");
+const apiRoutes = require("./routes/apiRoutes/index");
 
 // HTML ROUTES
-const htmlRoutes = require("./routes/htmlRoutes");
+const htmlRoutes = require("./routes/htmlRoutes/index");
 
 // Require file system
 const fs = require("fs");
