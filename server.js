@@ -30,9 +30,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Set up app use for HTML and API Routes
-app.use("/", htmlRoutes);
-
+// PRIORITY 
 app.use("/api", apiRoutes);
+
+// SECONDARY 
+app.use("/", htmlRoutes);
 
 // SERVER SET UP (2/2) - THIS MUST GO BELOW EXISTING ROUTES
 // FINAL STEP  - Tell app to listen for requests
