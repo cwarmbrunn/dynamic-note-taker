@@ -10,11 +10,10 @@ const fs = require("fs");
 const path = require("path");
 
 // Require file location of JSON file with note data
-const { notes } = require("../../db/db.json");
+const notes = require("../../db/db.json");
 
 // POST REQUEST #1 - RECEIVE NOTE DATA
 // Then return the new note to the client
-// Need to find a way to give each note a unique ID when it's saved
 router.post("/notes", (req, res) => {
   // Set up the newNote object - this will have three properties:
   // ID
@@ -23,33 +22,31 @@ router.post("/notes", (req, res) => {
   var newNote = {
     // Sets ID to random UUID
     id: randomUUID(),
+
     // Sets title equal to req.body.title
     title: req.body.title,
+
     // Sets text equal to req.body.text
+
     text: req.body.text,
   };
 
   // Push newNote into the existing note JSON file - db.json
   notes.push(newNote);
 
-  // TEST //
-  console.log(notes);
-
-  //See if we can add our new note to the db.json file.
-
-  //To do this we will want to .push our new note into an array containing all notes and then
-  //use fs to write our notes from our array to the db.json file
-
-  //After that is done, we want to use res.json to send the new note back to the client
+  // TEST Notes //
+  console.log("Your created note(s) are:", notes);
 
   // Write the file to the db.json file
   fs.writeFileSync(
+    // Specify the directory name for the note data
     path.join(__dirname, "../../db/db.json"),
-    JSON.stringify({ notes }, null, 2)
+    // Stringify the notes
+    JSON.stringify(notes)
   );
 
   // Response with the JSON of newNotes
-  res.json(newNotes);
+  res.json(newNote);
 });
 
 // GET REQUEST - READ NOTE DATA
