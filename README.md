@@ -12,7 +12,7 @@ An application that can be used to write and save notes - this uses an Express.j
 
 **Live Site:**
 
-Check out the Heroku site here! TBD
+Check out the Heroku site here!
 
 ---
 
@@ -33,4 +33,4 @@ No installation needed!
 ---
 
 **Screenshot:**
-![]()
+![A screenshot of the note taking app](./public/assets/screenshots/site-screenshot.jpg)
