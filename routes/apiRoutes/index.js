@@ -58,5 +58,17 @@ router.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "../../db/db.json"));
   console.log("Data from db.json has loaded to the page!");
 });
+
+// EXTRA CREDIT //
+// TO DO: SET UP DELETE
+// router.delete("/notes/id:", (req, res) => {
+// First - need to read all notes from the db.json file
+// res.sendFile(path.join(__dirname, "../../db/db.json"));
+// Second - remove the note with the given id property
+// var deletedNote = req.params.id
+// if(deletedNote){res.json()}
+// Third, re-write the notes to the db.json file
+// });
+
 // Export Router
 module.exports = router;
