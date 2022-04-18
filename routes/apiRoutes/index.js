@@ -3,6 +3,7 @@ const router = require("express").Router();
 
 const { randomUUID } = require("crypto");
 const req = require("express/lib/request");
+const { json } = require("express/lib/response");
 
 // Require file system
 const fs = require("fs");
@@ -59,14 +60,29 @@ router.get("/notes", (req, res) => {
 });
 
 // EXTRA CREDIT //
-// TO DO: SET UP DELETE
 router.delete("/notes/id:", (req, res) => {
-// First - need to read all notes from the db.json file
-res.sendFile(path.join(__dirname, "../../db/db.json"));
-// Second - remove the note with the given id property
-var deletedNote = req.params.id
-if(deletedNote){res.json()}
-// Third, re-write the notes to the db.json file
+  // Set a variable up to capture the deleted note id
+  let deletedNote = req.params.id;
+  // First - need to read all notes from the db.json file
+  fs.readFile(__dirname, "/db/db.json", (data) => {
+    // Create a for loop to cycle through the length of existing notes
+    for (let i = 0; i < notes.length; i++) {
+      // Set up a conditional for if a note equals the id selected (?)
+      if (notes[i].id === deletedNote) {
+        // Splice the notes and remove ONE!
+        notes.splice(i, 1);
+      }
+    }
+    // Finally, re-write the notes to the db.json file
+    fs.writeFile(__dirname + "db/db.json", JSON.stringify(notes), (err) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+        return;
+      }
+      res.send("Deleted note successfully!");
+    });
+  });
 });
 
 // Export Router
